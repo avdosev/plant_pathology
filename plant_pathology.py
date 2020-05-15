@@ -51,6 +51,8 @@ train_dataset = (
     tf.data.Dataset
     .from_tensor_slices((X_train, y_train))
     .map(load_dataset)
+    .repeat()
+    .shuffle(256)
     .batch(batch_size)
 )
 
