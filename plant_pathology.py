@@ -41,7 +41,7 @@ train_data.head()
 def load_image(image_id):
     file_path = image_id + ".jpg"
     image = cv2.imread(os.path.join(images_path, file_path))
-    k = 0.25
+    k = 0.20
     height, wide, _ = image.shape
     dim = (int(wide*k), int(height*k))
     image = cv2.resize(image, dim, interpolation = cv2.INTER_AREA)
@@ -139,7 +139,7 @@ model = keras.Sequential([
 
 
 model.compile(optimizer='adam',
-                  loss='sparse_categorical_crossentropy',
+                  loss='categorical_crossentropy',
                   metrics=['accuracy'])
 
 
@@ -158,7 +158,7 @@ model.fit(train_dataset, epochs=20, steps_per_epoch=X_train.shape[0]//batch_size
 # In[ ]:
 
 
-model.save(path.join('.', 'models', 'model.hdf5'))
+model.save(os.path.join('.', 'models', 'model.hdf5'))
 
 
 # In[ ]:
