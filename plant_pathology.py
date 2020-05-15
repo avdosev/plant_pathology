@@ -82,7 +82,7 @@ y_train.head()
 # In[67]:
 
 
-batch_size = 60
+batch_size = 20
 epochs = 20
 
 
