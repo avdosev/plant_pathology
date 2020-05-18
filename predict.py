@@ -6,6 +6,7 @@ from tensorflow import keras
 import tensorflow as tf
 from config import *
 from utils import *
+import math
 
 model = keras.models.load_model('./models/model.hdf5')
 
@@ -18,7 +19,8 @@ test_dataset = (
     .batch(batch_size)
 )
 
-probs = model.predict(test_dataset, verbose=1)
+steps = math.ceil(X_test.shape[0]/batch_size)
+probs = model.predict(test_dataset, verbose=1, steps=steps)
 
 sub = pd.read_csv(sub_path)
 sub.loc[:, 'healthy':] = probs
