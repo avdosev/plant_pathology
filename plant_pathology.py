@@ -45,7 +45,12 @@ model.compile(optimizer='adam',
 model.summary()
 
 
-model.fit(train_dataset, epochs=epochs, steps_per_epoch=X_train.shape[0]//batch_size)
+model.fit(train_dataset,
+          epochs=epochs,
+          steps_per_epoch=X_train.shape[0]//batch_size,
+          callbacks=[
+              keras.callbacks.EarlyStopping(monitor="loss", min_delta=0, patience=7, verbose=0, mode="min"),
+          ])
 
 models_path = os.path.join('.', 'models')
 if not os.path.exists(models_path):

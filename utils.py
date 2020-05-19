@@ -10,3 +10,13 @@ def load_dataset(filename, res=None):
     if res is None:
         return image
     return image, res
+
+
+def data_augment(image, label=None):
+    image = tf.image.random_flip_left_right(image)
+    image = tf.image.random_flip_up_down(image)
+
+    if label is None:
+        return image
+    else:
+        return image, label
