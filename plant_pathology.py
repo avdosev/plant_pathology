@@ -44,16 +44,20 @@ model.compile(optimizer='adam',
 
 model.summary()
 
-
-model.fit(train_dataset,
-          epochs=epochs,
-          steps_per_epoch=X_train.shape[0]//batch_size,
-          callbacks=[
-              keras.callbacks.EarlyStopping(monitor="loss", min_delta=0, patience=7, verbose=0, mode="min"),
-          ])
-
-models_path = os.path.join('.', 'models')
 if not os.path.exists(models_path):
     os.makedirs(models_path)
 
-model.save(os.path.join(models_path, 'model.hdf5'))
+model.fit(train_dataset,
+          epochs=epochs,
+          steps_per_epoch=X_train.shape[0]//batch_size*2,
+          callbacks=[
+              keras.callbacks.EarlyStopping(monitor="loss", min_delta=0, patience=7, verbose=0, mode="min"),
+              tf.keras.callbacks.ModelCheckpoint(
+                    filepath=os.path.join(models_path, 'model.hdf5'),
+                    save_weights_only=False,
+                    monitor='val_acc',
+                    mode='max',
+                    save_best_only=True
+              )
+          ]
+          )
