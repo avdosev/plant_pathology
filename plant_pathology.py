@@ -5,7 +5,7 @@ import os
 import cv2
 from tensorflow import keras
 import tensorflow as tf
-from utils import load_dataset
+from utils import load_dataset, data_augment
 from config import *
 
 
@@ -25,6 +25,7 @@ train_dataset = (
     tf.data.Dataset
     .from_tensor_slices((X_train, y_train))
     .map(load_dataset)
+    .map(data_augment)
     .repeat()
     .shuffle(256)
     .batch(batch_size)
