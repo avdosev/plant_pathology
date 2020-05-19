@@ -30,25 +30,11 @@ train_dataset = (
     .batch(batch_size)
 )
 
+classes = y_train.shape[1]
 model = keras.Sequential([
-    keras.layers.Conv2D(64, (5, 5), input_shape=input_shape, activation='relu'),
-    keras.layers.BatchNormalization(),
-    keras.layers.MaxPool2D((2, 2)),
-    keras.layers.Conv2D(64, (3, 3), activation='relu'),
-    keras.layers.BatchNormalization(),
-    keras.layers.MaxPool2D((2, 2)),
-    keras.layers.Conv2D(64, (3, 3), activation='relu'),
-    keras.layers.BatchNormalization(),
-    keras.layers.MaxPool2D((2, 2)),
-    keras.layers.Conv2D(64, (3, 3), activation='relu'),
-    keras.layers.BatchNormalization(),
-    keras.layers.MaxPool2D((2, 2)),
-    keras.layers.Conv2D(64, (3, 3), activation='relu'),
-    keras.layers.BatchNormalization(),
-    keras.layers.GlobalMaxPool2D(),
+    keras.applications.MobileNetV2(input_shape=input_shape),
     keras.layers.Dense(128, activation='relu'),
-    keras.layers.Dropout(0.2),
-    keras.layers.Dense(y_train.shape[1], activation='softmax')
+    keras.layers.Dense(classes, activation='softmax')
 ])
 
 
