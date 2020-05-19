@@ -32,8 +32,7 @@ train_dataset = (
 
 classes = y_train.shape[1]
 model = keras.Sequential([
-    keras.applications.MobileNetV2(input_shape=input_shape),
-    keras.layers.Dense(128, activation='relu'),
+    keras.applications.MobileNetV2(input_shape=input_shape, weights='imagenet', classifier_activation=None),
     keras.layers.Dense(classes, activation='softmax')
 ])
 
