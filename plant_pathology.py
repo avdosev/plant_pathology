@@ -53,11 +53,11 @@ model.fit(train_dataset,
           steps_per_epoch=X_train.shape[0]//batch_size*2,
           callbacks=[
               keras.callbacks.EarlyStopping(monitor="loss", min_delta=0, patience=7, verbose=0, mode="min"),
-              tf.keras.callbacks.ModelCheckpoint(
+              keras.callbacks.ModelCheckpoint(
                     filepath=os.path.join(models_path, 'model.hdf5'),
                     save_weights_only=False,
-                    monitor='val_acc',
-                    mode='max',
+                    monitor='loss',
+                    mode='min',
                     save_best_only=True
               )
           ]
