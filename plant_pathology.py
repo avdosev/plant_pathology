@@ -7,6 +7,7 @@ from tensorflow import keras
 import tensorflow as tf
 from utils import load_dataset, data_augment
 from config import *
+from networks import *
 
 
 train_data = pd.read_csv(train_path)
@@ -32,10 +33,8 @@ train_dataset = (
 )
 
 classes = y_train.shape[1]
-model = keras.Sequential([
-    keras.applications.MobileNetV2(input_shape=input_shape, weights='imagenet'),
-    keras.layers.Dense(classes, activation='softmax')
-])
+
+model = my_model(input_shape, classes)
 
 
 model.compile(optimizer='adam',
