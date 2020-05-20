@@ -29,3 +29,10 @@ def mobilenet_model(input_shape, classes):
         keras.applications.MobileNetV2(input_shape=input_shape, weights='imagenet'),
         keras.layers.Dense(classes, activation='softmax')
     ])
+
+
+def resnet_model(input_shape, classes):
+    return keras.Sequential([
+        keras.applications.InceptionResNetV2(input_shape=input_shape, weights='imagenet'),
+        keras.layers.Dense(classes, activation='softmax')
+    ])
