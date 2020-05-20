@@ -36,3 +36,11 @@ def resnet_model(input_shape, classes):
         keras.applications.InceptionResNetV2(input_shape=input_shape, weights='imagenet'),
         keras.layers.Dense(classes, activation='softmax')
     ])
+
+
+def resnet_model_v2(input_shape, classes):
+    return keras.Sequential([
+        keras.applications.InceptionResNetV2(input_shape=input_shape, weights='imagenet', include_top=False),
+        keras.layers.AveragePooling2D(),
+        keras.layers.Dense(classes, activation='softmax')
+    ])

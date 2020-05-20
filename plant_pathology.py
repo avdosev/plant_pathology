@@ -1,9 +1,6 @@
 #!/usr/bin/env python
-import numpy as np 
 import pandas as pd 
 import os
-import cv2
-from tensorflow import keras
 import tensorflow as tf
 from utils import load_dataset, data_augment
 from config import *
@@ -34,7 +31,7 @@ train_dataset = (
 
 classes = y_train.shape[1]
 
-model = resnet_model(input_shape, classes)
+model = resnet_model_v2(input_shape, classes)
 
 
 model.compile(optimizer='adam',
