@@ -31,7 +31,7 @@ train_dataset = (
 
 classes = y_train.shape[1]
 
-model = my_model(input_shape, classes)
+model = resnet_model_v2(input_shape, classes)
 
 
 model.compile(optimizer='adam',
