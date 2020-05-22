@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd 
 import os
 import cv2
+import efficientnet.tfkeras
 from tensorflow import keras
 import tensorflow as tf
 from config import *
