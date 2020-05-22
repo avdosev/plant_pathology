@@ -1,4 +1,5 @@
 from tensorflow import keras
+import efficientnet.keras as efn
 
 
 def my_model(input_shape, classes):
@@ -41,6 +42,14 @@ def resnet_model(input_shape, classes):
 def resnet_model_v2(input_shape, classes):
     return keras.Sequential([
         keras.applications.InceptionResNetV2(input_shape=input_shape, weights='imagenet', include_top=False),
+        keras.layers.GlobalAveragePooling2D(),
+        keras.layers.Dense(classes, activation='softmax')
+    ])
+
+
+def effnet_model_b5(input_shape, classes):
+    return keras.Sequential([
+        efn.EfficientNetB5(input_shape=input_shape, weights='imagenet', include_top=False),
         keras.layers.GlobalAveragePooling2D(),
         keras.layers.Dense(classes, activation='softmax')
     ])
