@@ -1,5 +1,5 @@
 from tensorflow import keras
-import efficientnet.keras as efn
+import efficientnet.tfkeras as efn
 
 
 def my_model(input_shape, classes):
@@ -48,8 +48,10 @@ def resnet_model_v2(input_shape, classes):
 
 
 def effnet_model_b5(input_shape, classes):
-    return keras.Sequential([
-        efn.EfficientNetB5(input_shape=input_shape, weights='imagenet', include_top=False),
-        keras.layers.GlobalAveragePooling2D(),
-        keras.layers.Dense(classes, activation='softmax')
-    ])
+    base_model = efn.EfficientNetB5(weights='imagenet', include_top=False, input_shape=input_shape)
+    x = base_model.output
+    x1 = keras.layers.GlobalAveragePooling2D()(x)
+    x2 = keras.layers.GlobalMaxPooling2D()(x)
+    x = keras.layers.concatenate([x1, x2])
+    predictions = keras.layers.Dense(classes, activation="softmax")(x)
+    return keras.models.Model(inputs=base_model.input, outputs=predictions)
