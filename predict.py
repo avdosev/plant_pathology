@@ -7,6 +7,7 @@ import tensorflow as tf
 from config import *
 from utils import *
 import math
+from datetime import datetime
 
 model = keras.models.load_model('./models/model.hdf5')
 
@@ -24,8 +25,8 @@ probs = model.predict(test_dataset, verbose=1, steps=steps)
 
 sub = pd.read_csv(sub_path)
 sub.loc[:, 'healthy':] = probs
-submission_path = os.path.join('.', 'output')
+submission_path = os.path.join('.', 'output', datetime.now().strftime("%Y%m%d_%H%M"))
 if not os.path.exists(submission_path):
     os.makedirs(submission_path)
-sub.to_csv('./output/submission.csv', index=False)
+sub.to_csv(os.path.join(submission_path, 'submission.csv'), index=False)
 sub.head()
