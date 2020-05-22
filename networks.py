@@ -47,8 +47,8 @@ def resnet_model_v2(input_shape, classes):
     ])
 
 
-def effnet_model_b3(input_shape, classes):
-    base_model = efn.EfficientNetB3(weights='imagenet', include_top=False, input_shape=input_shape)
+def effnet_model_b2(input_shape, classes):
+    base_model = efn.EfficientNetB2(weights='imagenet', include_top=False, input_shape=input_shape)
     x = base_model.output
     x1 = keras.layers.GlobalAveragePooling2D()(x)
     x2 = keras.layers.GlobalMaxPooling2D()(x)

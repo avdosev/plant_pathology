@@ -31,7 +31,7 @@ train_dataset = (
 
 classes = y_train.shape[1]
 
-model = effnet_model_b3(input_shape, classes)
+model = effnet_model_b2(input_shape, classes)
 
 
 model.compile(optimizer='adam',
