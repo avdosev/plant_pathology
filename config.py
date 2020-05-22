@@ -9,6 +9,7 @@ models_path = os.path.join('.', 'models')
 
 batch_size = 20
 epochs = 60
-input_shape = (273, 409, 3)  # Пропорциональная оригинальным
+# input_shape = (273, 409, 3)  # Пропорциональная оригинальным
+input_shape = (400, 400, 3)
 # input_shape = (224, 224, 3)  # Modilenet
 # input_shape = (299, 299, 3)  # resnet
