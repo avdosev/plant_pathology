@@ -53,6 +53,6 @@ def effnet_model_b2(input_shape, classes):
     x1 = keras.layers.GlobalAveragePooling2D()(x)
     x2 = keras.layers.GlobalMaxPooling2D()(x)
     x = keras.layers.concatenate([x1, x2])
-    x = keras.layers.Dropout(0.5)(x)
+    x = keras.layers.Dropout(0.2)(x)
     predictions = keras.layers.Dense(classes, activation="softmax")(x)
     return keras.models.Model(inputs=base_model.input, outputs=predictions)

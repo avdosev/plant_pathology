@@ -15,7 +15,7 @@ def load_dataset(filename, res=None):
 
 def augment(image):
     aug = Compose([
-        Blur(blur_limit=20),
+        Blur(blur_limit=15),
         HorizontalFlip(),
         VerticalFlip()
     ])
