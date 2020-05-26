@@ -39,7 +39,7 @@ test_dataset = (
 
 classes = y_train.shape[1]
 
-model = mobilenet_model(input_shape, classes)
+model = my_model(input_shape, classes)
 
 
 model.compile(optimizer='adam',
