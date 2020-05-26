@@ -1,6 +1,7 @@
 import tensorflow as tf
 from config import input_shape
-from albumentations import Compose, Blur, HorizontalFlip, VerticalFlip
+from albumentations import Compose, OneOf,\
+    Blur, MotionBlur, MedianBlur, HorizontalFlip, VerticalFlip, ShiftScaleRotate
 
 
 def load_dataset(filename, res=None):
@@ -15,9 +16,18 @@ def load_dataset(filename, res=None):
 
 def augment(image):
     aug = Compose([
-        Blur(blur_limit=10),
-        HorizontalFlip(),
-        VerticalFlip()
+        OneOf([
+            MotionBlur(),
+            MedianBlur(blur_limit=3),
+            Blur(blur_limit=10),
+        ]),
+        OneOf([
+            Compose([
+                HorizontalFlip(),
+                VerticalFlip(),
+            ]),
+            ShiftScaleRotate()
+        ])
     ])
     return aug(image=image.numpy())['image']
 
