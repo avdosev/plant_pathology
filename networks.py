@@ -27,14 +27,16 @@ def my_model(input_shape, classes):
 
 def mobilenet_model(input_shape, classes):
     return keras.Sequential([
-        keras.applications.MobileNetV2(input_shape=input_shape, weights='imagenet'),
+        keras.applications.MobileNetV2(input_shape=input_shape, weights='imagenet', include_top=False),
+        keras.layers.GlobalAveragePooling2D(),
         keras.layers.Dense(classes, activation='softmax')
     ])
 
 
 def resnet_model(input_shape, classes):
     return keras.Sequential([
-        keras.applications.InceptionResNetV2(input_shape=input_shape, weights='imagenet'),
+        keras.applications.InceptionResNetV2(input_shape=input_shape, weights='imagenet', include_top=False),
+        keras.layers.GlobalAveragePooling2D(),
         keras.layers.Dense(classes, activation='softmax')
     ])
 
